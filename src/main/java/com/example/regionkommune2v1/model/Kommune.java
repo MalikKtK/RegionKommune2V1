@@ -1,22 +1,19 @@
 package com.example.regionkommune2v1.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-
-import java.util.HashSet;
-import java.util.Set;
+import jakarta.persistence.*;
 
 @Entity
-public class Region {
+public class Kommune {
+
     @Id
     @Column(length = 4)
     private String kode;
     private String navn;
     private String href;
-    @OneToMany(mappedBy = "region")
-    private Set<Kommune> kommuner = new HashSet<>();
+
+ @ManyToOne
+ @JoinColumn(name = "regionkode", referencedColumnName = "kode")
+ private Region region;
 
     public String getKode() {
         return kode;
@@ -42,7 +39,3 @@ public class Region {
         this.href = href;
     }
 }
-
-
-
-//https://api.dataforsyningen.dk/regioner
